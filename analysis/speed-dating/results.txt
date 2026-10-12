@@ -1,0 +1,53 @@
+rows 8368, people 551, events 21, yes rate 42.0%
+
+A. stated importance vs what actually moves a yes (partner rated by other people)
+                       stated  revealed    coef
+   attractive             23%       65%    0.67
+   sincere                17%        0%   -0.12
+   intelligent            20%       10%    0.10
+   fun                    17%       17%    0.18
+   ambitious              11%        0%   -0.09
+   shared interests       12%        7%    0.07
+
+   do people who SAY a trait matters more respond to it more? (Spearman across people)
+   attractive         rho +0.06  (p=0.158, n=491)
+   sincere            rho +0.07  (p=0.111, n=491)
+   intelligent        rho -0.02  (p=0.642, n=491)
+   fun                rho +0.08  (p=0.096, n=491)
+   ambitious          rho +0.10  (p=0.022, n=491)
+   shared interests   rho +0.04  (p=0.362, n=491)
+
+B. ranking a person's LATER dates using only their EARLIER ones (per-person AUC, 0.50 = coin flip)
+   history dates per person: median 8; people with a usable personal taste: 457 of 541
+   what they said they want (stated weights)    0.747  [0.724, 0.769]  n=437
+   their own earlier yes/no choices             0.680  [0.651, 0.708]  n=403
+   what people in general respond to            0.763  [0.741, 0.786]  n=437
+   own choices, general weights if none         0.690  [0.663, 0.716]  n=437
+   how often others said yes to that partner    0.764  [0.743, 0.785]  n=437
+
+C. yes rate through the evening
+   first third 43.2%, last third 42.1%, change per person -1.1% [-3.5%, +1.1%]
+
+D. same person, two partners: how often do the two answers differ?
+   most similar 10% of pairs   33.2%
+   all pairs                   38.6%
+   least similar 10% of pairs  48.9%
+
+E. follow-ups (same later-dates test)
+   equal weights on every trait                 0.743  [0.721, 0.766]  n=437
+   a random other person stated weights         0.741  (20 shuffles, range 0.735-0.749)
+   general: traits + popularity                 0.774  [0.751, 0.796]  n=437
+   general + personal adjustment, lam=1         0.714  [0.689, 0.739]  n=437
+   general + personal adjustment, lam=3         0.747  [0.723, 0.770]  n=437
+   general + personal adjustment, lam=10        0.768  [0.746, 0.790]  n=437
+   general + personal adjustment, lam=30        0.779  [0.757, 0.800]  n=437
+   paired gain of lam=10 over general: -0.006 [-0.016, +0.003]
+
+F. the other side (later dates only)
+   yes from the chooser 41.5%; mutual yes 15.5%; so 63% of yeses are not returned
+   are popular people pickier? popularity vs own yes-rate: rho -0.28 (p=2.74e-11, n=541)
+   predicting a MUTUAL yes from partner popularity                   0.630  n=335
+   predicting a MUTUAL yes from how readily the partner says yes     0.610  n=334
+   predicting a MUTUAL yes from popularity x readiness               0.701  n=334
+   if each person were shown only their top 3: by popularity -> chooser yes 57.1%, mutual 21.3%
+                                                    by popularity x readiness -> chooser yes 51.4%, mutual 24.6%

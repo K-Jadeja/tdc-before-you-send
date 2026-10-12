@@ -1,0 +1,22 @@
+
+glasses: 6 with, 46 without
+  text probe ("glasses")        AUC 0.99
+  taste from 2 yes + 2 no     AUC 0.94
+  taste from 3 yes + 3 no     AUC 0.96
+  control (random labels, k=3)  AUC 0.48
+
+long hair (women only): 14 with, 18 without
+  text probe ("long_hair")        AUC 0.86
+  taste from 2 yes + 2 no     AUC 0.75
+  taste from 3 yes + 3 no     AUC 0.78
+  taste from 5 yes + 5 no     AUC 0.84
+  control (random labels, k=3)  AUC 0.53
+
+broad smile: 28 with, 24 without
+  text probe ("smiling")        AUC 0.91
+  taste from 2 yes + 2 no     AUC 0.59
+  taste from 3 yes + 3 no     AUC 0.62
+  taste from 5 yes + 5 no     AUC 0.64
+  control (random labels, k=3)  AUC 0.56
+
+pairwise similarity between different adult faces: min 0.62, median 0.79, max 0.96

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Before you send: try it | The Date Crew assessment prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #f3eee3; --ink: #1e2a2e; --muted: #5d6a6e; --line: #dcd3c2; --card: #fffdf8; --pen: #2445a8;
+      --stop: #b8431f; --stop-bg: #fbe6dd; --ask: #8a5a06; --ask-bg: #fbf0d3; --go: #1a7049; --go-bg: #e2f3ea; --quiet-bg: #ece7db; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.5 "Inter", system-ui, sans-serif; color: var(--ink); background: var(--bg); }
+    main { padding: 28px 20px 80px; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -.01em; }
+    h1 { font-size: clamp(32px, 4.6vw, 50px); line-height: 1.06; margin: 8px 0 10px; }
+    h2 { font-size: 26px; margin: 0 0 6px; }
+    h3 { font-size: 19px; margin: 0 0 4px; }
+    p { margin: 6px 0 10px; }
+    a { color: var(--ink); }
+    .muted { color: var(--muted); }
+    .column { max-width: 900px; margin: 0 auto; }
+    .what { font-size: 19px; max-width: 40em; }
+    .mock { display: inline-block; border-left: 3px solid var(--ask); background: var(--card); border-radius: 6px; padding: 6px 12px; font-size: 14px; }
+
+    /* A handwritten note, the real screen, another handwritten note. */
+    .stage { display: grid; grid-template-columns: 210px minmax(0, 900px) 210px; gap: 18px; justify-content: center; align-items: start; margin: 22px 0 46px; }
+    .hand { font: 600 24px/1.15 "Caveat", "Segoe Print", cursive; color: var(--pen); }
+    .hand b { font-size: 30px; display: block; }
+    .hand svg { display: block; width: 86px; height: 40px; margin-top: 2px; }
+    .hand.left { text-align: right; transform: rotate(-1.5deg); }
+    .hand.left svg { margin-left: auto; }
+    .hand.right { transform: rotate(1.2deg); }
+    .hand.right svg { transform: scaleX(-1); }
+    .hand > div { margin-bottom: 150px; }
+    .hand > div:first-child { margin-top: 74px; }
+
+    /* The matchmaker's screen */
+    .window { border: 1px solid #a9a191; border-radius: 14px; overflow: hidden; box-shadow: 0 18px 40px rgba(30, 42, 46, .14); background: #fff; }
+    .chrome { background: #2f3639; color: #fff; font-size: 13px; padding: 9px 14px; display: flex; align-items: center; gap: 6px; }
+    .chrome i { width: 10px; height: 10px; border-radius: 50%; background: #7d878b; }
+    .chrome span { margin-left: 8px; }
+    .screen { display: grid; grid-template-columns: minmax(0, 1fr) 380px; min-height: 560px; }
+    .compose { padding: 0 0 16px; display: flex; flex-direction: column; }
+    .compose .title { background: #f1f3f4; padding: 9px 18px; font-weight: 600; font-size: 14px; border-bottom: 1px solid #e3e5e6; }
+    .field { display: flex; align-items: center; gap: 10px; padding: 8px 18px; border-bottom: 1px solid #eceeef; font-size: 14.5px; }
+    .field label { color: var(--muted); width: 84px; flex: none; }
+    select { font: inherit; font-weight: 600; padding: 5px 8px; border: 1.5px solid var(--pen); border-radius: 8px; background: #fff; color: var(--ink); max-width: 100%; }
+    select:disabled { border-color: #d5d8da; color: var(--muted); }
+    #letter { padding: 12px 18px 4px; font-size: 14.5px; flex: 1; }
+    #letter ul { margin: 4px 0 8px; padding-left: 18px; }
+    .msg { border: 1px solid #e3e5e6; border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; }
+    .msg.mine { color: var(--muted); max-height: 118px; overflow: hidden; position: relative; }
+    .msg.mine::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 44px; background: linear-gradient(transparent, #fff); }
+    .msg.theirs { border-color: var(--ink); }
+    .msg .who { font-weight: 600; font-size: 13.5px; color: var(--ink); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    .face { width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 13px; }
+    .system { font-size: 14px; font-weight: 600; padding: 8px 12px; border-radius: 8px; }
+    .system.go { background: var(--go-bg); color: var(--go); } .system.ask { background: var(--ask-bg); color: var(--ask); }
+    .actions { padding: 0 18px; display: flex; gap: 10px; align-items: center; }
+    .actions button { font: inherit; font-weight: 700; border: 0; border-radius: 999px; padding: 9px 26px; cursor: pointer; color: #fff; background: #1a56c4; }
+    #next { background: var(--ink); }
+    button:focus-visible, select:focus-visible { outline: 3px solid var(--pen); outline-offset: 2px; }
+
+    /* The side panel: the new part */
+    .side { background: var(--card); border-left: 3px solid var(--ink); display: flex; flex-direction: column; }
+    .side-head { background: var(--ink); color: var(--bg); padding: 9px 16px; font-weight: 700; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+    .side-head small { font-weight: 600; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; background: var(--pen); border-radius: 999px; padding: 2px 9px; }
+    #panel { padding: 4px 16px 16px; font-size: 14.5px; }
+    #panel .label { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 14px 0 4px; }
+    #panel .file p { margin: 2px 0; }
+    .fact { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+    .fact .n { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 600 14px "Fraunces", Georgia, serif; background: var(--quiet-bg); }
+    .fact.stop .n { background: var(--stop); color: #fff; } .fact.ask .n { background: var(--ask); color: #fff; } .fact.go .n { background: var(--go); color: #fff; }
+    .fact .q { font-weight: 600; }
+    .fact.stop .q b, .filed.stop { color: var(--stop); } .fact.ask .q b, .filed.ask { color: var(--ask); } .fact.go .q b, .filed.go { color: var(--go); }
+    .fact .d { color: var(--muted); font-size: 13.5px; }
+    .why { font-size: 13px; color: var(--muted); margin-top: 3px; }
+    .why summary { cursor: pointer; color: var(--pen); font-weight: 600; width: fit-content; }
+    .suggest { margin-top: 10px; padding: 9px 12px; border-radius: 10px; font-weight: 700; font-size: 16px; }
+    .suggest span { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+    .suggest.stop { background: var(--stop-bg); color: var(--stop); } .suggest.ask { background: var(--ask-bg); color: var(--ask); } .suggest.go { background: var(--go-bg); color: var(--go); }
+    .filed { font-weight: 600; }
+    .verdict { font: 600 26px/1.1 "Caveat", cursive; color: var(--pen); margin: 6px 0 0; }
+    .looks { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--muted); }
+    .looks b { color: var(--ink); }
+
+    /* Below the screen */
+    .steps { counter-reset: n; list-style: none; padding: 0; margin: 14px 0 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .steps li { counter-increment: n; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+    .steps li::before { content: counter(n); width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--bg); font: 600 16px "Fraunces", Georgia, serif; display: grid; place-items: center; margin-bottom: 8px; }
+    .steps p { margin: 0; color: var(--muted); font-size: 14.5px; }
+    .honest { background: var(--card); border: 1px dashed var(--muted); border-radius: 12px; padding: 12px 16px; font-size: 14.5px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 12px 0; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+    .stat b { display: block; font: 600 30px/1.15 "Fraunces", Georgia, serif; }
+    .stat span { color: var(--muted); font-size: 14px; }
+    section.column { margin-bottom: 44px; }
+
+    @media (max-width: 1370px) {
+      .stage { grid-template-columns: minmax(0, 900px); }
+      .hand { display: flex; flex-wrap: wrap; gap: 4px 22px; transform: none !important; text-align: left !important; font-size: 21px; }
+      .hand b { display: inline; font-size: 23px; }
+      .hand > div, .hand > div:first-child { margin: 0; }
+      .hand svg { display: none; }
+      .hand.right { order: -1; }
+    }
+    @media (max-width: 800px) { .steps { grid-template-columns: 1fr; } .screen { grid-template-columns: 1fr; } .side { border-left: 0; border-top: 3px solid var(--ink); } }
+  </style>
+</head>
+<body>
+<main>
+  <div class="column">
+    <a href="index.html#solution">&larr; Back to the solution</a>
+    <h1>Before you send: try it</h1>
+    <p class="what">A side panel inside Gmail that checks three things before a matchmaker sends a profile to a client.
+      Below is a working mock-up of her screen. <b>You are the matchmaker.</b></p>
+    <span class="mock"><b>Every person and email here is invented</b>, built to match the numbers in the brief.</span>
+  </div>
+
+  <div class="stage">
+    <div class="hand left">
+      <div><b>1. Write as usual</b>Choose the client and who you want to introduce.
+        <svg viewBox="0 0 92 44" aria-hidden="true"><path d="M4 30 C 30 8, 58 8, 82 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M70 14 L84 25 L67 31" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><b>3. Press Send</b>The client's reply comes back, as it did last month.
+        <svg viewBox="0 0 92 44" aria-hidden="true"><path d="M4 30 C 30 8, 58 8, 82 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M70 14 L84 25 L67 31" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+
+    <div class="window">
+      <div class="chrome"><i></i><i></i><i></i><span>Gmail (a mock-up, not the real thing)</span></div>
+      <div class="screen">
+        <div class="compose">
+          <div class="title">New message</div>
+          <div class="field"><label for="to">To</label><select id="to"></select></div>
+          <div class="field"><label for="intro">Introducing</label><select id="intro"></select></div>
+          <div class="field"><label>Subject</label>Someone I would like you to meet</div>
+          <div id="letter" aria-live="polite"></div>
+          <div class="actions"><button id="send">Send</button><button id="next" hidden>Write the next email</button></div>
+        </div>
+        <div class="side">
+          <div class="side-head">Before you send <small>new side panel</small></div>
+          <div id="panel" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hand right">
+      <div><b>2. Read the panel</b>This is the new part. It already knows the client's file and your old emails.
+        <svg viewBox="0 0 92 44" aria-hidden="true"><path d="M4 30 C 30 8, 58 8, 82 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M70 14 L84 25 L67 31" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div>It never decides for you. It only shows what is already on record.</div>
+    </div>
+  </div>
+
+  <section class="column">
+    <h2>How this would work for real</h2>
+    <p class="muted">The Date Crew's email already runs on Gmail, and the brief says profiles go to clients by email. So the tool goes where the matchmaker already is.</p>
+    <ol class="steps">
+      <li><h3>Added to Gmail once</h3><p>As a Gmail add-on or a small Chrome extension. The matchmaker opens nothing new and logs in to nothing new.</p></li>
+      <li><h3>It reads two things from the draft</h3><p>Who the email is to, and whose profile is in it. Nothing else, and nothing is sent anywhere.</p></li>
+      <li><h3>It looks both people up</h3><p>In the client's file, and in the record of who said yes or no to earlier emails. Building that record from the old inbox is the first job.</p></li>
+      <li><h3>It learns from the reply</h3><p>When the client answers, the reason is filed. A new reason is suggested for the client's file; the matchmaker confirms it.</p></li>
+    </ol>
+    <div class="honest"><b>What exists today.</b> This page only imitates Gmail, with invented people. I have not built the real add-on yet.
+      Whether an add-on or an extension is the better route for a panel beside a draft is a question for the first week.</div>
+  </section>
+
+  <section class="column">
+    <h2>Does it help?</h2>
+    <p class="muted">The same three checks, run over all 1,000 invented emails from the month.</p>
+    <div class="stats" id="totals"></div>
+  </section>
+</main>
+<script src="checker.js?v=7"></script>
+<script src="data/mock.js?v=7"></script>
+<script src="app.js?v=8"></script>
+</body>
+</html>
