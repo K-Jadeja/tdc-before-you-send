@@ -114,6 +114,16 @@ The number is two yeses per 100 emails, and it has not moved.
 
 One more two-week cycle, then decide.
 
+## Why it looks like this
+
+Before designing anything I read how you describe yourselves, and it changed the design.
+
+- **Your site says "No AI. No App. No Endless Swiping."** So nothing here faces the client, nothing is scored, and the matchmaker is never overruled. The only AI works behind the scenes, reading replies into a record. The checks are plain rules, and she can see the reason for each one.
+- **Your job post asks for AI only where it earns its place.** That is why my first step is a pinned note and a week of counting, not a build.
+- **I dropped two ideas for the same reason.** One was a set of sample profiles for new clients to say yes or no to, which is swiping by another name. The other was learning each client's "type" from photos. The model could see it, but the choice data said it would not help yet.
+- **People are not their forms.** In the speed-dating test, what someone said they wanted predicted their choices no better than a stranger's list. And a no given to a human matchmaker may be polite rather than final. So the panel treats deal breakers as firm and a vague no as an open question.
+- **Matchmakers are craftspeople.** A tool that grades them gets ignored. This one hands her what is on record and gets out of the way.
+
 ## Evidence: what I tested before choosing
 
 I had none of your data, so I used a public one. Both tests are in `analysis/` in the repo.
