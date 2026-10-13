@@ -147,9 +147,8 @@ The same data showed two more things. The same person gave near-identical partne
 
 ## AI Usage
 
-<!-- DRAFT: Krishna to rewrite in his own words and check every claim before sending -->
-
-- I used Claude Code for all of it: reading the brief, both tests, the prototype, the film, and first drafts of this document.
-- Claude's first move was to pick the 35% and build a preference checker in one pass, without asking me. I set that aside and asked what clients are not telling us.
-- I then pushed for learning each client's "type" with an on-device model. Claude suggested testing it on public data first. It lost, so I parked it.
-- The brief suggests 60 to 90 minutes. The first answer took about that. I then spent an evening on it, because I did not trust my own favourite idea.
+- **Tool and use:** Claude Code, as a fast pair of hands. A working prototype existed within the first hour, and I had it rebuilt four times in one evening, each time judging it as a matchmaker opening it cold, until it explained itself. It also ran my two tests and built the film.
+- **What I rejected:** its first answer, which was to pick the 35%, build a rule checker and stop. That is correct, and it is what every AI will say. I asked instead what clients are not telling us.
+- **Where a test overruled me:** I wanted to learn each client's "type" with an on-device model. Before building it, I had it tested on public data. It lost, so I parked it.
+- **AI and matchmaking:** you sell human matchmaking over algorithms, so I kept AI out of the match itself. It builds, counts and reads replies. It never scores a person or picks one. The matchmaker does.
+- **What I had to catch:** it fills gaps with confident guesses. It wrote that matchmakers work from memory, which your brief never says, and quoted an outside dataset where your own table had the number. I took both out.
